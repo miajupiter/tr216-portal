@@ -1,17 +1,17 @@
 var ipInfo = { country_calling_code: '90' }
 
-if(localStorage.getItem('ipInformation') == null) {
+if (localStorage.getItem('ipInformation') == null) {
 	postMan(`https://ipapi.co/json/`, { method: 'GET' })
 		.then(result => {
 			ipInfo = result
 			localStorage.setItem('ipInformation', JSON.stringify(result))
 		})
-		.catch(err => {})
+		.catch(err => { })
 } else {
 	ipInfo = JSON.parse(localStorage.getItem('ipInformation'))
 }
-if(ipInfo) {
-	if(ipInfo.country_calling_code) {
+if (ipInfo) {
+	if (ipInfo.country_calling_code) {
 		ipInfo.country_calling_code = ipInfo.country_calling_code.replaceAll('+', '')
 	} else {
 		ipInfo.country_calling_code = '90'
@@ -114,7 +114,7 @@ let pages = {
 
 window.onhashchange = () => {
 	let key = window.location.hash.substr(1)
-	if(pages[key] != undefined) {
+	if (pages[key] != undefined) {
 		document.querySelector('#content').innerHTML = pages[key]
 	} else {
 		document.querySelector('#content').innerHTML = pages.index
@@ -131,16 +131,16 @@ function resetPass() {
 	loginInfo.password = $('#password').val() || ''
 	loginInfo.rePassword = $('#rePassword').val() || ''
 
-	if(!loginInfo.resetCode) {
+	if (!loginInfo.resetCode) {
 		location.href = 'login.html'
 		return
 	}
-	if(loginInfo.password.length < 4) {
+	if (loginInfo.password.length < 4) {
 		$('.login-warning').html(`${warnIcon} Password must be at least 8 characters`)
 		return
 	}
 
-	if(loginInfo.password != loginInfo.rePassword) {
+	if (loginInfo.password != loginInfo.rePassword) {
 		$('.login-warning').html(`${warnIcon} Retyped password doesn't match password`)
 		return
 	}
@@ -161,22 +161,22 @@ function forgotPass() {
 
 	loginInfo.username = $('#forgotUsername').val().replaceAll(' ', '').replaceAll('+', '')
 
-	if(!isNaN(loginInfo.username)) {
-		if(loginInfo.username.length < 10) {
+	if (!isNaN(loginInfo.username)) {
+		if (loginInfo.username.length < 10) {
 			$('.login-warning').html(`${warnIcon} Incorrect phone number`)
 			return
 		}
-		if(loginInfo.username.substr(0, 1) == '0') {
+		if (loginInfo.username.substr(0, 1) == '0') {
 			loginInfo.username = loginInfo.username.substr(1)
 		}
-		if(loginInfo.username.length > 10 && loginInfo.username.substr(0, ipInfo.country_calling_code.length) != ipInfo.country_calling_code) {
+		if (loginInfo.username.length > 10 && loginInfo.username.substr(0, ipInfo.country_calling_code.length) != ipInfo.country_calling_code) {
 			$('.login-warning').html(`${warnIcon} Incorrect phone number`)
 			return
 		}
-		if(loginInfo.username.length <= 10) {
+		if (loginInfo.username.length <= 10) {
 			$('#forgotUsername').val(ipInfo.country_calling_code + loginInfo.username)
 		}
-	} else if(loginInfo.username.indexOf('@') > -1) {
+	} else if (loginInfo.username.indexOf('@') > -1) {
 
 	} else {
 		$('.login-warning').html(`${warnIcon} Incorrect phone number or email`)
@@ -200,22 +200,22 @@ function nextToPassword() {
 
 	loginInfo.username = $('#username').val().replaceAll(' ', '').replaceAll('+', '')
 
-	if(!isNaN(loginInfo.username)) {
-		if(loginInfo.username.length < 10) {
+	if (!isNaN(loginInfo.username)) {
+		if (loginInfo.username.length < 10) {
 			$('.login-warning').html(`${warnIcon} Incorrect phone number`)
 			return
 		}
-		if(loginInfo.username.substr(0, 1) == '0') {
+		if (loginInfo.username.substr(0, 1) == '0') {
 			loginInfo.username = loginInfo.username.substr(1)
 		}
-		if(loginInfo.username.length > 10 && loginInfo.username.substr(0, ipInfo.country_calling_code.length) != ipInfo.country_calling_code) {
+		if (loginInfo.username.length > 10 && loginInfo.username.substr(0, ipInfo.country_calling_code.length) != ipInfo.country_calling_code) {
 			$('.login-warning').html(`${warnIcon} Incorrect phone number`)
 			return
 		}
-		if(loginInfo.username.length <= 10) {
+		if (loginInfo.username.length <= 10) {
 			$('#username').val(ipInfo.country_calling_code + loginInfo.username)
 		}
-	} else if(loginInfo.username.indexOf('@') > -1) {
+	} else if (loginInfo.username.indexOf('@') > -1) {
 
 	} else {
 		$('.login-warning').html(`${warnIcon} Incorrect phone number or email`)
@@ -228,7 +228,7 @@ function nextToPassword() {
 		})
 		.catch(err => {
 			showError(err, () => {
-				if(err.code == 'USER_NOT_VERIFIED') {
+				if (err.code == 'USER_NOT_VERIFIED') {
 					location.hash = 'verify'
 				}
 			})
@@ -239,25 +239,25 @@ function nextToPassword() {
 
 function login() {
 	$('.login-warning').html('')
-	if(!loginInfo.username) {
+	if (!loginInfo.username) {
 		location.href = location.origin + location.pathname
 		return
 	}
-	if(!$('#password').val()) {
+	if (!$('#password').val()) {
 		$('.login-warning').html(`${warnIcon} password hatalı`)
 		return
 	}
 
 	loginInfo.password = $('#password').val()
 
-	console.log(`loginInfo:`, loginInfo)
 	postMan('/auth/login', { method: 'POST', data: loginInfo })
 		.then(result => {
-			initializeGlobals(result.token)
+			console.log(`token:`, result)
+			initializeGlobals(result)
 		})
 		.catch(err => {
 			showError(err, () => {
-				if(err.code == 'USER_NOT_VERIFIED') {
+				if (err.code == 'USER_NOT_VERIFIED') {
 					location.hash = 'verify'
 				}
 			})
@@ -272,22 +272,22 @@ function createAccount() {
 
 	$('.login-warning').html('')
 
-	if(!isNaN(loginInfo.username)) {
-		if(loginInfo.username.length < 10) {
+	if (!isNaN(loginInfo.username)) {
+		if (loginInfo.username.length < 10) {
 			$('.login-warning').html(`${warnIcon} Incorrect phone number`)
 			return
 		}
-		if(loginInfo.username.substr(0, 1) == '0') {
+		if (loginInfo.username.substr(0, 1) == '0') {
 			loginInfo.username = loginInfo.username.substr(1)
 		}
-		if(loginInfo.username.length > 10 && loginInfo.username.substr(0, ipInfo.country_calling_code.length) != ipInfo.country_calling_code) {
+		if (loginInfo.username.length > 10 && loginInfo.username.substr(0, ipInfo.country_calling_code.length) != ipInfo.country_calling_code) {
 			$('.login-warning').html(`${warnIcon} Incorrect phone number`)
 			return
 		}
-		if(loginInfo.username.length <= 10) {
+		if (loginInfo.username.length <= 10) {
 			$('#username').val(ipInfo.country_calling_code + loginInfo.username)
 		}
-	} else if(loginInfo.username.indexOf('@') > -1) {
+	} else if (loginInfo.username.indexOf('@') > -1) {
 
 	} else {
 		$('.login-warning').html(`${warnIcon} Incorrect phone number or email`)
@@ -295,12 +295,12 @@ function createAccount() {
 	}
 
 
-	if(loginInfo.password.length < 4) {
+	if (loginInfo.password.length < 4) {
 		$('.login-warning').html(`${warnIcon} Password must be at least 8 characters`)
 		return
 	}
 
-	if(loginInfo.password != loginInfo.rePassword) {
+	if (loginInfo.password != loginInfo.rePassword) {
 		$('.login-warning').html(`${warnIcon} Retyped password doesn't match password`)
 		return
 	}
@@ -317,7 +317,7 @@ function createAccount() {
 
 function verify() {
 	loginInfo.authCode = trimNumbers($('#authCode').val())
-	if(loginInfo.authCode.length != 4)
+	if (loginInfo.authCode.length != 4)
 		return
 	postMan('/auth/verify', { method: 'POST', data: loginInfo })
 		.then(result => {
@@ -333,17 +333,21 @@ function verify() {
 
 
 function initializeGlobals(token) {
-	
-	postMan('/session', { method: 'POST', data: {token:token} })
+
+	// postMan('/session', { method: 'POST', data: {token:token} })
+	postMan('/session/current', { method: 'GET', data: { token: token } })
 		.then(result => {
+			console.log(`result:`, result)
 			global.token = token
-			global=Object.assign({},global,result)
+			global = Object.assign({}, global, result)
 			localStorage.setItem('global', JSON.stringify(global || {}))
-			location.href = '/'
+			location.href = config.basePath || '/'
 		})
 		.catch(err => {
+			console.log(`err:`, err)
 			showError(err, () => {
-				if(err.code == 'USER_NOT_VERIFIED') {
+
+				if (err.code == 'USER_NOT_VERIFIED') {
 					location.href = 'login.html#verify'
 				}
 			})
@@ -351,7 +355,7 @@ function initializeGlobals(token) {
 }
 
 $(document).ready(() => {
-	if(document.querySelector('#username input')) {
+	if (document.querySelector('#username input')) {
 		$('#username').on('focus', () => {
 			$('.login-warning').html('')
 			$('#username').select()
@@ -362,11 +366,11 @@ $(document).ready(() => {
 		document.querySelector('#username').value = loginInfo.username
 	}
 
-	if(document.querySelector('#login-username')) {
+	if (document.querySelector('#login-username')) {
 		document.querySelector('#login-username').innerHTML = loginInfo.username
 	}
 
-	if(document.querySelector('#authCode')) {
+	if (document.querySelector('#authCode')) {
 		$('#authCode').inputmask({
 			'mask': '9999',
 			'greedy': false,
@@ -377,7 +381,7 @@ $(document).ready(() => {
 
 		$('#authCode').on('keydown', e => {
 
-			if($('#authCode').val().length == 4)
+			if ($('#authCode').val().length == 4)
 				keyEnter(e, verify)
 		})
 	}
@@ -386,7 +390,7 @@ $(document).ready(() => {
 
 
 
-function showError(err,cb) {
+function showError(err, cb) {
 	$('.login-warning').html(`${err.message || err.name || ''}`)
-	
+
 }

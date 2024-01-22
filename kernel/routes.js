@@ -1,8 +1,8 @@
-const auth = require('../lib/auth')
-const spamCheck = require('../lib/spam-detector')
+const auth = require('./lib/auth')
+const spamCheck = require('./lib/spam-detector')
 
 module.exports = (app) => {
-  app.all('/*', (req, res, next) => {
+  app.all('/api/*', (req, res, next) => {
     req.IP =
       req.headers['x-forwarded-for'] || req.connection.remoteAddress || ''
     req.getValue = (key) => {

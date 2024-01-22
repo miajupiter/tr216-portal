@@ -13,7 +13,7 @@ module.exports = () => new Promise(async (resolve, reject) => {
   app.use(cors())
   app.use(favicon(path.join(__dirname, 'favicon.ico')))
 
-  // process.env.NODE_ENV === 'development' && app.use(logger('dev'))
+  process.env.NODE_ENV === 'development' && app.use(logger('tiny'))
 
   app.use(bodyParser.json({ limit: "500mb" }))
   app.use(bodyParser.urlencoded({ limit: "500mb", extended: true, parameterLimit: 50000 }))
@@ -34,7 +34,7 @@ module.exports = () => new Promise(async (resolve, reject) => {
   }
 
   
-  require('./rest/routes')(app)
+  require('./routes')(app)
   resolve(app)
   eventLog(`[RestAPI]`.cyan, 'started')
 

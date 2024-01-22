@@ -1,4 +1,4 @@
-const sender = require('../../../lib/sender')
+const sender = require('../../lib/sender')
 
 module.exports = (req) =>
 	new Promise((resolve, reject) => {

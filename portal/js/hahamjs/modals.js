@@ -85,7 +85,7 @@ function logout() {
 	confirmX('Programdan çıkmak istiyor musunuz?', (resp) => {
 		if(resp) {
 			localStorage.removeItem('global')
-			window.location.href = `${global.basePath}/login`
+			window.location.href = `${config.basePath}/login.html`
 		}
 	})
 }

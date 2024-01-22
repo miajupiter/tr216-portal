@@ -1,0 +1,116 @@
+{
+  "index": [
+    {
+      "type": "filter",
+      "fields": {
+        "tarih": { "text": "Tarih", "type": "dateRange" }
+      }
+    },
+    {
+      "type": "grid",
+      "fields": {
+        "posDevice.location": {
+          "text": "Lokasyon",
+          "type": "remoteLookup",
+          "dataSource": {
+            "type": "remote",
+            "method": "GET",
+            "url": "/dbapi/locations"
+          },
+          "width": "140px"
+        },
+        "posDevice.deviceSerialNo": {
+          "text": "Cihaz Seri No",
+          "type": "string"
+        },
+        "startZNo": { "text": "ZNo Baslangic", "type": "string", "class": "text-end" },
+        "endZNo": { "text": "ZNo Bitis", "type": "string", "class": "text-end"},
+        "count": { "text": "ZRap Adet", "type": "string", "class": "text-end" },
+		"KumuleTutar": { "type": "money" },
+		"KumuleVergiKDV": { "type": "money" },
+		"OncekiKumuleTutar": { "type": "money" },
+		"OncekiKumuleVergiKDV": { "type": "money" },
+		"FarkKumuleTutar": { "type": "money" },
+		"FarkKumuleVergiKDV": { "type": "money" },
+		"GunlukToplamTutar": { "type": "money" },
+		"GunlukToplamKDV": { "type": "money" },
+		"NakitTutari": { "type": "money" },
+		"KrediTutari": { "type": "money" },
+		"InvoiceTotal": { "type": "money" },
+		"EInvoiceTotal":  { "type": "money" },
+		"EArchiveInvoiceTotal": { "type": "money" },
+		"BankaTransferTutari": { "type": "money" },
+		"QR_CardAmount": { "type": "money" },
+		"QR_FastAmount": { "type": "money" },
+		"QR_MobileAmount": { "type": "money" },
+		"QR_OtherAmount": { "type": "money" },
+		"QR_EParaAmount": { "type": "money" },
+		"TaxRate0Amount": { "type": "money" },
+		"TaxRate1Amount": { "type": "money" },
+		"TaxRate10Amount":  { "type": "money" },
+		"TaxRate20Amount": { "type": "money" },
+		"TaxRateOtherAmount":  { "type": "money" },
+		"TaxRate8Amount": { "type": "money" },
+		"TaxRate18Amount": { "type": "money" },
+		"YuzdeArttirimAdedi": { "type": "number" , "round": 0 },
+		"YuzdeIndirimAdedi": { "type": "number" , "round": 0 },
+		"IptalAdedi": { "type": "number" , "round": 0 },
+		"HataDuzeltAdedi": { "type": "number" , "round": 0 },
+		"MaliFisAdedi": { "type": "number" , "round": 0 },
+		"MaliOlmayanFisAdedi": { "type": "number" , "round": 0 },
+		"MusteriFisAdedi": { "type": "number" , "round": 0 },
+		"IptalFisAdedi": { "type": "number" , "round": 0 },
+		"SatisIptalFisAdedi": { "type": "number" , "round": 0 },
+		"FaturaliSatisAdedi": { "type": "number" , "round": 0 },
+		"FaturaliSatisTutari": { "type": "money" },
+		"FoodSaleCnt": { "type": "number" , "round": 0 },
+		"FoodRcptTotalAmount": { "type": "money" },
+		"YuzdeArttirimTutari": { "type": "money" },
+		"YuzdeIndirimTutari": { "type": "money" },	
+		"IptalTutari": { "type": "money" },
+		"OtoparkEntryCnt": { "type": "number" , "round": 0 },
+		"CariHesapAdedi": { "type": "number" , "round": 0 },
+		"InvoiceOtherPayment": { "type": "money" },
+		"OtherPaymentTotalAmount": { "type": "money" },
+		"AvansIslemSayisi": { "type": "number" , "round": 0 },
+		"Avans": { "type": "money" },
+		"KasaOdeme": { "type": "money" },
+		"FiscalReportReceiptCnt": { "type": "number" , "round": 0 },
+		"TasnifDisiReceiptCnt": { "type": "number" , "round": 0 },
+		"InvoiceCash": { "type": "money" },
+		"MobilPayment": { "type": "money" },
+		"TaxRefund": { "type": "money" },
+		"TaxlessAmount": { "type": "money" },
+		"TaxlessCount": { "type": "number" , "round": 0 },
+		"CreditInvoice": { "type": "money" },
+		"PaymentGift": { "type": "money" },
+		"PaymentTreat": { "type": "money" },
+		"PaymentFree": { "type": "money" },
+		"PaymentDeposit": { "type": "money" },
+		"PaymentPoint": { "type": "money" },
+		"PaymentExpense": { "type": "money" },
+		"PaymentCheck": { "type": "money" },
+		"PaymentAcikHesap": { "type": "money" },
+		"HataDuzeltTutari": { "type": "money" },
+		"OKCVersion": { "type":"string" }
+      },
+      "options": {
+        "selection": false,
+        "filter": true,
+        "buttons": {
+          "add": false,
+          "edit": false,
+          "delete": false,
+          "view": false,
+          "print": false,
+          "copy": false
+        }
+      },
+      "dataSource": {
+        "type": "remote",
+        "method": "GET",
+        "url": "/dbapi/pos-device-zreports/rapor1"
+      }
+    }
+  ]
+}

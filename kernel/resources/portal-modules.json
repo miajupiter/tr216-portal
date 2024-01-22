@@ -1,0 +1,100 @@
+{
+    "dashboard" : true,
+    "invoice" : {
+        "outbox" : false,
+        "inbox" : false,
+        "gibUsers" : false,
+        "customers" : false,
+        "vendors" : false
+    },
+    "despatch" : {
+        "outbox" : false,
+        "inbox" : false,
+        "gibUsers" : false,
+        "customers" : false,
+        "vendors" : false
+    },
+    "orders" : {
+        "outbox" : false,
+        "inbox" : false,
+        "waitingSaleOrders" : false,
+        "customers" : false,
+        "vendors" : false
+    },
+    "mrp" : {
+        "productionOrders" : false,
+        "productionOrdersPlan" : false,
+        "waitingSaleOrders" : false,
+        "products" : false,
+        "semiProducts" : false,
+        "materialPlanning" : false,
+        "raports" : {
+            "productionAnalize" : false,
+            "costAnalize" : false
+        },
+        "defines" : {
+            "rawMaterials" : false,
+            "helperMaterials" : false,
+            "stations" : false,
+            "machineGroups" : false,
+            "machines" : false,
+            "moldGroups" : false,
+            "molds" : false,
+            "processSteps" : false,
+            "breakReasons" : false
+        }
+    },
+    "inventory" : {
+        "items" : false,
+        "inventory" : false,
+        "inventoryFiches" : false,
+        "defines" : {
+            "palletTypes" : false,
+            "pallets" : false,
+            "packingTypes" : false
+        }
+    },
+    "finance" : {
+        "customers" : false,
+        "vendors" : false,
+        "flow" : false,
+        "balances" : false,
+        "casing" : false,
+        "bank" : false
+    },
+    "accounting" : {
+        "accounts" : false,
+        "accountGroups" : false,
+        "entry" : false,
+        "flow" : false,
+        "ledger" : false
+    },
+    "posDevice" : {
+        "transfer" : false,
+        "reports" : {
+            "rapor1" : false,
+            "rapor2" : false
+        },
+        "defines" : {
+            "devices" : false,
+            "services" : false
+        }
+    },
+    "settings" : {
+        "locations" : true,
+        "subLocations" : false,
+        "shifts" : false,
+        "persons" : false,
+        "printDesigns" : false,
+        "integrators" : true,
+        "programs" : true,
+        "workingParams" : {
+            "general" : false,
+            "private" : false
+        }
+    },
+    "system" : {
+        "dbdefines" : true,
+        "tasks" : true
+    }
+}

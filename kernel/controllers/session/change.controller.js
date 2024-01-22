@@ -34,23 +34,23 @@ const changeLanguage = (dbModel, sessionDoc, req) =>
 const changeActiveDb = (dbModel, sessionDoc, req) =>
   new Promise(async (resolve, reject) => {
     if (req.params.param2) {
-        db.dbDefines.findOne({
-          _id: req.params.param2,
-          deleted: false,
-          $or: [
-            { owner: sessionDoc.member },
-            { 'authorizedMembers.memberId': sessionDoc.member },
-          ],
-        }).then(dbDoc=>{
-          
-					if(dbNull(dbDoc,reject)) {
-						sessionDoc.dbId=dbDoc._id
-            sessionDoc
+      db.dbDefines.findOne({
+        _id: req.params.param2,
+        deleted: false,
+        $or: [
+          { owner: sessionDoc.member },
+          { 'authorizedMembers.memberId': sessionDoc.member },
+        ],
+      }).then(dbDoc => {
+
+        if (dbNull(dbDoc, reject)) {
+          sessionDoc.dbId = dbDoc._id
+          sessionDoc
             .save()
             .then(resolve('Session database has been successfully changed'))
-            .catch(reject)			
-					}
-				}).catch(reject)
-      
+            .catch(reject)
+        }
+      }).catch(reject)
+
     } else restError.param2(req, reject)
   })

@@ -1,4 +1,4 @@
-const userDbHelper = require('../../../db/helpers/userdb-helper')
+const userDbHelper = require('../../db/helpers/userdb-helper')
 
 module.exports = (req) =>
 	new Promise((resolve, reject) => {

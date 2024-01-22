@@ -1,0 +1,53 @@
+{
+	"index":[
+		{
+			"type": "grid",
+			"fields":{
+				"partyName.name.value": {"text":"Tedarikçi adı", "type":"string", "filterField":"partyName"},
+				"partyType":{"text":"Tür", "type":"lookup", "staticValues":"partyTypeShortList", "class":"text-center" },
+				"postalAddress.cityName.value": {"text":"Şehir", "type":"string", "filterField":"cityName"},
+				"postalAddress.district.value": {"text":"İlçe", "type":"string", "filterField":"district"},
+				"passive": {"text":"Pasif?", "type":"boolean"}
+			},
+			"options": {
+				"selection": true,
+				"filter": true,
+				"buttons": {
+					"add": true,
+					"edit": true,
+					"delete": true,
+					"view": false,
+					"print": false,
+					"copy": true
+				}				
+			},
+			"dataSource": {
+				"type":"remote",
+				"method":"GET",
+				"url":"/dbapi/vendors"
+			}
+		}
+	],
+	"form": [
+		{
+			"type":"form",
+			"fields": {
+				"partyName.name.value":{"text":"Müşteri Adı", "type":"string", "col":6 ,"required":true},
+				"person.firstName.value": { "text": "Şahıs Adı", "type": "string","col": 3 },
+				"person.familyName.value": { "text": "Şahıs Soyadı", "type": "string", "col": 3 },
+				"partyIdentification.0.ID.attr.schemeID": { "text": "Tür", "type": "lookup", "lookup": { "VKN": "VKN", "TCKN": "TCKN" }, "col": 2 },
+				"partyIdentification.0.ID.value": { "text": "Vergi No/Tckn", "type": "string", "col": 3 },
+				"partyTaxScheme.taxScheme.name.value": {"text": "Vergi Dairesi",	"type": "string",	"col": 4},
+				"websiteURI.value": { "text": "Web sitesi", "type": "string", "col": 3 },
+				"adresBilgileri": { "text": "Adres bilgisi", "type": "widget", "widget": "postalAddress", "grouped":true, "collapsed": true, "prefix": "postalAddress.", "col": 12 },
+				"iletisim": { "text": "İletişim", "type": "widget", "widget": "contact", "grouped":true, "collapsed": true, "prefix": "contact.", "col": 12 },
+				"partyType":{"text":"Tür", "type":"lookup", "staticValues":"partyTypeList" , "col":4},
+				"passive":{"text":"Pasif?", "type":"boolean", "col":4    }
+			},
+			"dataSource": {
+				"method":"GET",
+				"url":"/dbapi/vendors"
+			}
+		}
+	]
+}

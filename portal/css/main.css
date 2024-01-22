@@ -19329,7 +19329,11 @@ a:hover {
 .dark .modal-content {
   background-color: var(--bs-dark); }
 
-.dark .modal-header,
+.dark .modal-header {
+  background: none !important;
+  color: rgba(var(--bs-light-rgb),1) !important;
+  border-color: var(--bs-gray-800) !important; }
+
 .dark .modal-footer {
   background: none !important;
   color: unset !important;
