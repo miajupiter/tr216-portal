@@ -8,7 +8,6 @@ var cookieParser = require('cookie-parser')
 var app = express()
 var cors = require('cors')
 
-
 module.exports = () => new Promise(async (resolve, reject) => {
   app.use(cors())
   app.use(favicon(path.join(__dirname, 'favicon.ico')))
@@ -32,6 +31,16 @@ module.exports = () => new Promise(async (resolve, reject) => {
     repo: await util.moduleLoader(path.join(__dirname, '/controllers/repo'), '.controller.js'),
     session: await util.moduleLoader(path.join(__dirname, '/controllers/session'), '.controller.js'),
   }
+
+
+  global.staticValues = loadJSONFile(path.join(__dirname, '/resources/static-values.json'))
+  global.portalModules = loadJSONFile(path.join(__dirname, '/resources/portal-modules.json'))
+  global.version = '20210916'
+  global.fileImporter = require('./lib/file-importer')
+  global.documentHelper = require('./lib/document-helper')
+  global.printHelper = require('./lib/print-helper')
+  global.programs = require('./services/programs/programs')
+  // global.auth = require('./lib/rest-helper')(config.passport_api)
 
   
   require('./routes')(app)

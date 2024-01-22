@@ -166,3 +166,11 @@ exports.clone=function(obj){
     return obj
   }
 }
+
+global.loadJSONFile = (fileName) => {
+	let s = fs.readFileSync(fileName, 'utf8')
+	// s=s.replaceAll('\t','\\t').replaceAll('\r','\\r').replaceAll('\n','\\n')
+	let TAB = '  '
+	s = s.replace(/\t/g, TAB)
+	return JSON.parse(s)
+}
